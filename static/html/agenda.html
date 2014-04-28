@@ -4,8 +4,11 @@
 </head>
 <body>
 	<h1>Agenda</h1>
+	<form method = "post">
+		<input type="submit" value="New Event"/>
+	</form>
 	{% for event in events %}
-	<p>{{event.title}}</p>
+	<p><b>{{event.title}}</b> <br/> {{event.date}} <br/> {{event.description}} </p>
 	{% endfor %}
 </body>
 </html>
