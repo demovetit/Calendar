@@ -27,7 +27,19 @@
 					<label for="date">Date</label>
 				</td>
 				<td>
-					<input id="date" type="text" name="date"/>
+					<input id="date" type="text" name="date" placeholder = "dd-mm-yyyy"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="colour">Colour</label>
+				</td>
+				<td>
+					<select name="colour">
+						{% for colour in colours %}
+						<option value='{{colour}}'>{{colour.capitalize()}}</option>
+						{% endfor %}
+					</select>
 				</td>
 			</tr>
 			<tr>

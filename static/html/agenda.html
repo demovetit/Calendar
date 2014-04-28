@@ -8,7 +8,7 @@
 		<input type="submit" value="New Event"/>
 	</form>
 	{% for event in events %}
-	<p><b>{{event.title}}</b> <br/> {{event.date}} <br/> {{event.description}} </p>
+	<p><b>{{event.title}}</b> <br/> {{event.date_formatted}} <br/> {{event.description}} </p>
 	{% endfor %}
 </body>
 </html>
