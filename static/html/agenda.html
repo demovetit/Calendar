@@ -1,0 +1,11 @@
+<html>
+<head>
+	<title>Agenda</title>
+</head>
+<body>
+	<h1>Agenda</h1>
+	{% for event in events %}
+	<p>{{event.title}}</p>
+	{% endfor %}
+</body>
+</html>

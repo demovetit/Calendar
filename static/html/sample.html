@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Test page</title>
+</head>
+<body>
+	<!--Single item from dictionary-->
+	<h1>{{title}}</h1>
+	
+	{% for event in events %}
+
+	{% if event.public_holiday %}
+	<p>{{event.name}} (Public Holiday)</p>
+	{% else %}
+	<p>{{event.name}}</p>
+	{% endif %}
+	{% endfor %}
+</body>
+</html>
