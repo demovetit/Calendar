@@ -11,6 +11,7 @@ handlers:
 
 - url: .*
   script: entry.app
+  login: required
 
 libraries:
 - name: webapp2
