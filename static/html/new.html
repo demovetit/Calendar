@@ -1,6 +1,15 @@
 <html>
 <head>
 	<title>New Event</title>
+
+	<style>
+
+		input.error {
+			outline: #FF0000 solid 2px;
+		}
+
+	</style>
+
 </head>
 <body>
 	<h1>New Event</h1>
@@ -8,10 +17,14 @@
 		<table>
 			<tr>
 				<td>
-					<label for="title">Title</label>
+					{{form.title.label()}}
 				</td>
 				<td>
-					<input id="title" type="text" name="title"/> 
+					{% if form.title.errors %}
+					<input class="error" id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
+					{% else %}
+					<input id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
+					{% endif %}
 				</td>
 			</tr>
 			<tr>

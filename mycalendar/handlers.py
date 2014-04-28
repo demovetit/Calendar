@@ -1,4 +1,5 @@
 import mycalendar
+import mycalendar.forms
 import mycalendar.models
 import datetime
 
@@ -30,6 +31,7 @@ class New(mycalendar.BaseHandler):
 	def get(self):
 
 		template_values = {
+			'form': mycalendar.forms.NewEvent(),
 			'colours': mycalendar.models.COLOURS
 		}
 
@@ -37,22 +39,32 @@ class New(mycalendar.BaseHandler):
 	#Gets data from New.html
 	def post(self):
 
+		"""
 		title = self.request.get("title")
 		description = self.request.get("description")
 		datestr = self.request.get("date")
 		date = datetime.datetime.strptime(datestr, '%d-%m-%Y').date()
 		colour = self.request.get('colour')
-		
-		#Data Dictionary
-		event = mycalendar.models.Event(
-			title = title,
-			description = description,
-			date = date,
-			colour = colour
-		)
-		event.put()
-		#what if its fails or user enters bad data?
+		"""
+		form = mycalendar.forms.NewEvent(self.request.POST)
 
+		if form.validate():
 
-		self.redirect("/agenda")
-		
+			#Data Dictionary
+			event = mycalendar.models.Event(
+				title = form.title.data,
+				description = form.description.data,
+				date = form.date.data,
+				colour = form.colour.data
+			)
+			event.put()
+
+			self.redirect("/agenda")
+		else:
+
+			template_values = {
+				'form': form,
+				'colours': mycalendar.models.COLOURS
+			}
+
+			self.render_template("new", template_values)
