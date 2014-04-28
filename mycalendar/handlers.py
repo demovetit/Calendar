@@ -16,7 +16,7 @@ class Agenda(mycalendar.BaseHandler):
 
 		template_values = {
 			"title": "Events",
-			"events":  mycalendar.models.Event.query()
+			"events":  mycalendar.models.Event.query().order(mycalendar.models.Event.date)
 		}
 
 		self.render_template("agenda", template_values)
@@ -34,7 +34,7 @@ class New(mycalendar.BaseHandler):
 		}
 
 		self.render_template("new", template_values)
-
+	#Gets data from New.html
 	def post(self):
 
 		title = self.request.get("title")
@@ -43,6 +43,7 @@ class New(mycalendar.BaseHandler):
 		date = datetime.datetime.strptime(datestr, '%d-%m-%Y').date()
 		colour = self.request.get('colour')
 		
+		#Data Dictionary
 		event = mycalendar.models.Event(
 			title = title,
 			description = description,

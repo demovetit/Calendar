@@ -7,6 +7,7 @@
 	<form method = "post">
 		<input type="submit" value="New Event"/>
 	</form>
+	<!-- Pulls data from Models.py--> 
 	{% for event in events %}
 	<p><b>{{event.title}}</b> <br/> {{event.date_formatted}} <br/> {{event.description}} </p>
 	{% endfor %}
