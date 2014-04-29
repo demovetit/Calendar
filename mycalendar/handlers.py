@@ -39,6 +39,9 @@ class AgendaDelete(mycalendar.BaseHandler):
 
 		self.redirect('/agenda')
 
+
+
+
 class EventEdit(mycalendar.BaseHandler):
 
 	def get(self):
@@ -51,7 +54,6 @@ class EventEdit(mycalendar.BaseHandler):
 		if event is None:
 			self.response.status = 404
 			return
-
 		form = mycalendar.forms.NewEvent()
 		form.title.data = event.title
 		form.description.data = event.description
@@ -72,7 +74,6 @@ class EventEdit(mycalendar.BaseHandler):
 
 		event_key = ndb.Key("Event", event_id)
 		event = event_key.get()
-
 		if event is None:
 			self.response.status = 404
 			return
@@ -86,8 +87,6 @@ class EventEdit(mycalendar.BaseHandler):
 			event.date = form.date.data
 			event.colour = form.colour.data
 			event.put()
-
-			
 			template_values = {
 				'updated': True,
 				'form': form,
@@ -101,7 +100,7 @@ class EventEdit(mycalendar.BaseHandler):
 			#if date validation fails then reset to an empty string
 			if form.date.data is None:
 				form.date.data = ""
-
+		
 			template_values = {
 				'updated': False,
 				'form': form,
@@ -109,6 +108,7 @@ class EventEdit(mycalendar.BaseHandler):
 			}
 
 			self.render_template("edit", template_values)
+
 
 
 
@@ -125,13 +125,6 @@ class EventNew(mycalendar.BaseHandler):
 	#Gets data from New.html
 	def post(self):
 
-		"""
-		title = self.request.get("title")
-		description = self.request.get("description")
-		datestr = self.request.get("date")
-		date = datetime.datetime.strptime(datestr, '%d-%m-%Y').date()
-		colour = self.request.get('colour')
-		"""
 		form = mycalendar.forms.NewEvent(self.request.POST)
 
 		if form.validate():

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>New Event</title>
+	<title>Edit Event</title>
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 
@@ -65,9 +65,9 @@
 				<td>
 				</td>
 				<td>
-
-					<p class="{{template_values}}"> Information Updated</p>
-					
+					{% if updated == True %}
+					<p> Info Updated</p>
+					{% endif %}
 					<a href="/agenda">Back</a>
 					<input type="submit" value="Update"/>
 				</td>
