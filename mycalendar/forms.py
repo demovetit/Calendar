@@ -1,9 +1,7 @@
 from wtforms import Form, StringField
 from wtforms import DateField
 from wtforms import validators
-
 from datetime import date
-
 import mycalendar.models
 
 class NewEvent(Form):
@@ -25,7 +23,6 @@ class NewEvent(Form):
 	)
 
 	date = DateField(
-		#format = "%d-%m-%Y",
 		label="Date",
 		description="yyyy-mm-dd",
 		default=date.today(),

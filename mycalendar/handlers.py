@@ -37,8 +37,7 @@ class AgendaDelete(mycalendar.BaseHandler):
 
 		ndb.Key(mycalendar.models.Event , int(ID)).delete()
 
-
-		self.redirect("/agenda")
+		self.redirect('/agenda')
 
 class New(mycalendar.BaseHandler):
 
