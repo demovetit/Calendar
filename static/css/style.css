@@ -1,0 +1,44 @@
+body{
+	
+	font-family: 'Segoe UI';
+}
+
+h1{
+	
+	text-align: center;
+}
+
+p{
+	font-size: 110%;
+}
+
+input.error {
+	
+	outline: #FF0000 solid 2px;
+}
+
+p.blue{
+
+	color: #0000FF;
+}
+
+p.red{
+
+	color: #FF0000;
+}
+
+p.green{
+	
+	color:#00FF00;
+}
+
+p.false{
+	display: none;
+}
+
+a{
+
+	text-decoration: none;
+	font-size: 14px;
+	font-family: 'Segoe UI';
+}

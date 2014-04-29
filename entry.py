@@ -17,5 +17,6 @@ app = webapp2.WSGIApplication([
     ('/', mycalendar.handlers.Index),
     ('/agenda', mycalendar.handlers.Agenda),
     ('/agenda/delete', mycalendar.handlers.AgendaDelete),
-    ('/new', mycalendar.handlers.New),
+    ('/event/edit', mycalendar.handlers.EventEdit),
+    ('/event/new', mycalendar.handlers.EventNew),
 ], debug=True, config=_WEBAPP_WEB_CONFIG)
