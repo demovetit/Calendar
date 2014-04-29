@@ -62,6 +62,10 @@ class New(mycalendar.BaseHandler):
 			self.redirect("/agenda")
 		else:
 
+			#if date validation fails then reset to an empty string
+			if form.date.data is None:
+				form.date.data = ""
+
 			template_values = {
 				'form': form,
 				'colours': mycalendar.models.COLOURS
