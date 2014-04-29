@@ -2,7 +2,7 @@ import mycalendar
 import mycalendar.forms
 import mycalendar.models
 import datetime
-
+from google.appengine.ext import ndb
 
 
 class Index(mycalendar.BaseHandler):
@@ -25,6 +25,20 @@ class Agenda(mycalendar.BaseHandler):
 	def post(self):
 
 		self.redirect("/new")
+
+class AgendaDelete(mycalendar.BaseHandler):
+	
+	def post(self):
+		# import logging
+		# logging.error(self.request.get("event_id"))
+		
+		ID = self.request.get("event_id")
+
+
+		ndb.Key(mycalendar.models.Event , int(ID)).delete()
+
+
+		self.redirect("/agenda")
 
 class New(mycalendar.BaseHandler):
 
