@@ -1,7 +1,9 @@
 import mycalendar
 import mycalendar.forms
 import mycalendar.models
-import datetime
+from datetime import date
+from datetime import timedelta
+
 from google.appengine.ext import ndb
 
 
@@ -17,7 +19,7 @@ class Agenda(mycalendar.BaseHandler):
 
 		template_values = {
 			"title": "Events",
-			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= datetime.date.today()).order(mycalendar.models.Event.date),
+			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= date.today()).order(mycalendar.models.Event.date),
 		}
 
 		self.render_template("agenda", template_values)
@@ -43,13 +45,40 @@ class Monthly(mycalendar.BaseHandler):
 	
 	def get(self):
 
-		month=datetime.date.today()
-		fullmonthname = datetime.datetime.strftime(month, '%B %Y')
+		today = date.today()
+
+		start_date = date(today.year, today.month, 1)
+
+		#go back to previous monday
+		if start_date.weekday() != 0:
+			start_date = start_date + timedelta(days=-start_date.weekday())
+
+		end_date = start_date + timedelta(days=34)
+
+		events = mycalendar.models.Event.query().filter(
+			mycalendar.models.Event.date >= start_date,
+			mycalendar.models.Event.date <= end_date
+		)
+
+		weeks = list()
+		day_of_month = start_date
+		for i in range(5):#Weeks Loop
+			
+			weeks.append(list())
+			
+			for j in range(7): #Days Loop
+				weeks[i].append(list())
+
+				for event in events:
+					if event.date == day_of_month:
+						weeks[i][j].append(event)
+
+				day_of_month = day_of_month + timedelta(days=1)
 
 		template_values = {
 			"title": "Events",
-			"month": fullmonthname,
-			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= datetime.date.today()).order(mycalendar.models.Event.date),
+			"table_title": today.strftime('%B %Y'),
+			"weeks": weeks
 		}
 
 		self.render_template("monthly", template_values)
