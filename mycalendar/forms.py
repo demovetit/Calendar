@@ -17,7 +17,7 @@ class NewEvent(Form):
 
 	description = StringField(
 		label="Description",
-		description="Description",
+		description="",
 		default="",
 		
 	)

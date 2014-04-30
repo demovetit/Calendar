@@ -43,8 +43,12 @@ class Monthly(mycalendar.BaseHandler):
 	
 	def get(self):
 
+		month=datetime.date.today()
+		fullmonthname = datetime.datetime.strftime(month, '%B %Y')
+
 		template_values = {
 			"title": "Events",
+			"month": fullmonthname,
 			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= datetime.date.today()).order(mycalendar.models.Event.date),
 		}
 

@@ -5,11 +5,49 @@ body{
 
 h1{
 	font-family: 'Segoe UI';
-	font-size: 150%;
-	color:#FF00FF;
+	font-size: 250%;
+	color:#080808;
 	text-align: center;
 }
 
+h2{
+	font-family: 'Segoe UI';
+	font-size: 200%;
+	color:#080808;
+	text-align: center;
+}
+
+h3{
+	font-family: 'Segoe UI';
+	font-size: 150%;
+	color:#080808;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.monthly,.monthlyRow,.monthlyColumn, .DayRow{
+	border:solid 2px;
+}
+
+.monthly{
+	margin-left: auto;
+	margin-right: auto;
+	width=90%;
+	height=75%;
+}
+
+.monthlyColumn{
+	width:14.3%;
+	vertical-align: top;
+}
+
+.DayRow{
+	height:1%;
+}
+
+.monthlyRow{
+	height: 10%;
+}
 p{
 	font-size: 110%;
 }
@@ -39,14 +77,26 @@ form{
 }
 
 input{
-	border-radius: 1em;
-	-moz-border-radius:1em;
-	-webkit-border-radius:1em;
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
 	-ms-border-radius:1em;
-	background-color:#785354;
+	background-color:#000000;
 	color:#FFFFFF;
 
 }
+
+#title{
+	width: 300px;
+	height:25px;
+}
+
+#description{
+	height: 50px;
+	width: 300px;
+}
+
+
 
 a{
 	color:#0066FF;
