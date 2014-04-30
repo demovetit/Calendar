@@ -9,7 +9,7 @@ class Index(mycalendar.BaseHandler):
 
 	def get(self):
 
-		self.redirect("/agenda")
+		self.redirect("/monthly")
 
 class Agenda(mycalendar.BaseHandler):
 
@@ -26,7 +26,7 @@ class Agenda(mycalendar.BaseHandler):
 
 		self.redirect("/event/new")
 
-class AgendaDelete(mycalendar.BaseHandler):
+class EventDelete(mycalendar.BaseHandler):
 	
 	def post(self):
 		# import logging
@@ -39,7 +39,20 @@ class AgendaDelete(mycalendar.BaseHandler):
 
 		self.redirect('/agenda')
 
+class Monthly(mycalendar.BaseHandler):
+	
+	def get(self):
 
+		template_values = {
+			"title": "Events",
+			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= datetime.date.today()).order(mycalendar.models.Event.date),
+		}
+
+		self.render_template("monthly", template_values)
+
+	def post(self):
+
+		self.redirect("/event/new")
 
 
 class EventEdit(mycalendar.BaseHandler):

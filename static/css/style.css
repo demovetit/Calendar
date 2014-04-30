@@ -4,7 +4,9 @@ body{
 }
 
 h1{
-	
+	font-family: 'Segoe UI';
+	font-size: 150%;
+	color:#FF00FF;
 	text-align: center;
 }
 
@@ -29,16 +31,38 @@ p.red{
 
 p.green{
 	
-	color:#00FF00;
+	color: #00FF00;
 }
 
-p.false{
-	display: none;
+form{
+	margin: 1% auto;
+}
+
+input{
+	border-radius: 1em;
+	-moz-border-radius:1em;
+	-webkit-border-radius:1em;
+	-ms-border-radius:1em;
+	background-color:#785354;
+	color:#FFFFFF;
+
 }
 
 a{
-
+	color:#0066FF;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 125%;
 	font-family: 'Segoe UI';
+	margin-right: 2.5%;
+	margin-bottom: 5%;
+}
+
+a:hover{
+	font-size: 16px;
+	color:#0066FF;
+
+}
+
+a:visited{
+	color:#0066FF;
 }

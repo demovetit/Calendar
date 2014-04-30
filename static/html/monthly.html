@@ -1,16 +1,15 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>Agenda</title>
+	<title>Monthly</title>
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 
 </head>
 <body>
-	<h1>Agenda</h1>
+	<h1>Monthly</h1>
 	<a href="/monthly">Monthly</a>
 	<a href="/agenda">Agenda</a>
-	
+
 	<form method = "post">
 		<input id="newEvent" type="submit" value="New Event"/>
 	</form>
@@ -20,7 +19,7 @@
 	<!-- Pulls data from Models.py--> 
 	{% for event in events %}
 	<p class="{{event.colour}}"><b>{{event.title}}</b> <br/> {{event.date_formatted}} <br/> {{event.description}} </p>
-	<form method="POST" action="/event/delete">
+	<form method="POST" action="/agenda/delete">
 		<input type="hidden" name="event_id" value="{{event.key.id()}}">
 		<input id="Delete" type = "submit" value ="Delete" />
 	</form>
