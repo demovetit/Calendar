@@ -17,14 +17,14 @@ class Agenda(mycalendar.BaseHandler):
 
 		template_values = {
 			"title": "Events",
-			"events":  mycalendar.models.Event.query().order(mycalendar.models.Event.date)
+			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= datetime.date.today()).order(mycalendar.models.Event.date),
 		}
 
 		self.render_template("agenda", template_values)
 
 	def post(self):
 
-		self.redirect("/new")
+		self.redirect("/event/new")
 
 class AgendaDelete(mycalendar.BaseHandler):
 	
@@ -151,3 +151,7 @@ class EventNew(mycalendar.BaseHandler):
 			}
 
 			self.render_template("new", template_values)
+
+
+
+
