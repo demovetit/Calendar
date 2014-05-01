@@ -102,8 +102,8 @@ p{
 
 /* Colour Code of Events */
 p.blue{
-
-	color: #0000FF;
+	color: #0099FF;
+	
 }
 
 p.red{
@@ -116,20 +116,34 @@ p.green{
 	color: #04B431;
 }
 
+p.dark-blue{
+
+	color:#0066CC;
+}
+
 /* Background color in monthly mode */
 p.bgblue{
 
-	background-color: #0000FF;
+	background-color: #0099FF;
 }
 
 p.bgred{
 
 	background-color: #FF0000;
+	color: #FFFFFF;
+	line-height: 150%;
 }
 
 p.bggreen{
-	
+	color: #FFFFFF;	
 	background-color: #04B431;
+	line-height: 150%;
+}
+
+p.bgdark-blue{
+	background-color:#0066CC;
+	color: #FFFFFF;
+	line-height: 150%;
 }
 
 

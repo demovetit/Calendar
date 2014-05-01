@@ -1,7 +1,7 @@
 from google.appengine.ext import ndb
 import datetime
 
-COLOURS = ['none', 'blue', 'green', 'red']
+COLOURS = ['none', 'blue', 'green', 'red', 'dark-blue']
 
 #Puts data from the server
 class Event(ndb.Model):

@@ -7,7 +7,6 @@
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">	
   	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
 
   	<script>
 	$(function() {
@@ -79,6 +78,9 @@
 					<td>
 						{% if updated == True %}
 						<p> Info Updated</p>
+						<p>Redirecting.........</p>
+						<script type="text/javascript">
+							setTimeout(function(){window.location = '/agenda'}, 2000); </script>
 						{% endif %}
 						<input type="button" onclick="document.location.href='/agenda'" value="  Back  " />
 						<input type="submit" value="Update"/>
