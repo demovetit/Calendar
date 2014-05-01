@@ -3,76 +3,89 @@
 	<title>Edit Event</title>
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">	
+  	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+
+  	<script>
+	$(function() {
+    	$( "#date" ).datepicker({ dateFormat: "yy-mm-dd" });
+  	});
+	</script>
 
 </head>
 <body>
-	<h1>Edit Event</h1>
-	<form method="post">
-		<table class="eventsPage">
-			<tr>
-				<td>
-					{{form.title.label()}}
-				</td>
-				<td>
-					{% if form.title.errors %}
-					<input class="error" id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
-					{% else %}
-					<input id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
-					{% endif %}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					{{form.description.label()}}
-				</td>
-				<td>
-					{% if form.description.errors %}
-					<input id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
-					{% else %}
-					<input id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
-					{% endif %}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					{{form.date.label()}}
-				</td>
-				<td>
-					{% if form.date.errors %}
-					<input class="error" id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
-					{% else %}
-					<input id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
-					{% endif %}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="colour">Colour</label>
-				</td>
-				<td>
-					<select name="colour">
-						{% for colour in colours %}
-						{% if form.colour.data == colour %}
-						<option selected value='{{colour}}'>{{colour.capitalize()}}</option>
+	<div class="masterContainer">
+		<h1>Edit Event</h1>
+		<form method="post">
+			<table class="eventsPage">
+				<tr>
+					<td>
+						{{form.title.label()}}
+					</td>
+					<td>
+						{% if form.title.errors %}
+						<input class="error" id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
 						{% else %}
-						<option value='{{colour}}'>{{colour.capitalize()}}</option>
+						<input id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
 						{% endif %}
-						{% endfor %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				</td>
-				<td>
-					{% if updated == True %}
-					<p> Info Updated</p>
-					{% endif %}
-					<a href="/agenda">Back</a>
-					<input type="submit" value="Update"/>
-				</td>
-			</tr>
-		</table>
-	</form>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						{{form.description.label()}}
+					</td>
+					<td>
+						{% if form.description.errors %}
+						<input id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
+						{% else %}
+						<input id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						{{form.date.label()}}
+					</td>
+					<td>
+						{% if form.date.errors %}
+						<input class="error" id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
+						{% else %}
+						<input id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="colour">Colour</label>
+					</td>
+					<td>
+						<select name="colour">
+							{% for colour in colours %}
+							{% if form.colour.data == colour %}
+							<option selected value='{{colour}}'>{{colour.capitalize()}}</option>
+							{% else %}
+							<option value='{{colour}}'>{{colour.capitalize()}}</option>
+							{% endif %}
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						{% if updated == True %}
+						<p> Info Updated</p>
+						{% endif %}
+						<input type="button" onclick="document.location.href='/agenda'" value="  Back  " />
+						<input type="submit" value="Update"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

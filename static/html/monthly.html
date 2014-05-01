@@ -6,66 +6,59 @@
 
 </head>
 <body>
-	<table class = "masterTable">
-		<tr>
-			<td>
-			
-			<br>
-			<h1>Monthly</h1>
-			<form method = "post">
-				<input id="newEvent" type="submit" value="New Event"/>
-				<a href="/monthly" class= "diffViews">Monthly</a>
-				<a href="/agenda" class= "diffViews">Agenda</a>
-			</form>
+	<div class="masterContainer">
+		<h1>Monthly</h1>
+		<form method = "post">
+			<input id="newEvent" type="submit" value="New Event"/>
+			<input type="button" class="diffViews" onclick="document.location.href='/monthly'" value=" Monthly " />
+			<input type="button" class="diffViews" onclick="document.location.href='/agenda'" value="Agenda" />
+		</form>
 
-			<p> Refresh your browser to see recent changes </p>
-			<hr>
-			<h2>{{table_title}}</h2>
-			<br>
+		<p> Refresh your browser to see recent changes </p>
+		<hr>
+		<h2>{{table_title}}</h2>
+		<br>
+		
+		<table class="monthly">
+			<tr class="DayRow" >
+				<td class="DayRow">
+					<h3> Monday </h3>
+				</td>
+				<td class="DayRow">
+					<h3> Tuesday </h3>
+				</td>
+				<td class="DayRow">
+					<h3> Wednesday </h3>
+				</td>			
+				<td class="DayRow">
+					<h3> Thursday </h3>
+				</td>
+				<td class="DayRow">
+					<h3> Friday </h3>
+				</td>			
+				<td class="DayRow">
+					<h3> Saturday </h3>
+				</td>
+				<td class="DayRow">
+					<h3> Sunday </h3>
+				</td>
+			</tr>
 			
-			<table class="monthly">
-				<tr class="DayRow" >
-					<td class="DayRow">
-						<h3> Monday </h3>
-					</td>
-					<td class="DayRow">
-						<h3> Tuesday </h3>
-					</td>
-					<td class="DayRow">
-						<h3> Wednesday </h3>
-					</td>			
-					<td class="DayRow">
-						<h3> Thursday </h3>
-					</td>
-					<td class="DayRow">
-						<h3> Friday </h3>
-					</td>			
-					<td class="DayRow">
-						<h3> Saturday </h3>
-					</td>
-					<td class="DayRow">
-						<h3> Sunday </h3>
-					</td>
-				</tr>
-				
-				{% for week in weeks %}
-					<tr class="monthlyRow">
-					{% for day in week %}
-					<td class="monthlyColumn">
-						{% for event in day %}
-						<p>{{event.only_date}}</p>
-						<p class="bg{{event.colour}}"><strong>{{event.title}}</strong> - {{event.description}}
-						{% endfor %}
-					</td>
+			{% for week in weeks %}
+				<tr class="monthlyRow">
+				{% for day in week %}
+				<td class="monthlyColumn">
+					{% for event in day %}
+					<p>{{event.only_date}}</p>
+					<p class="bg{{event.colour}}"><strong>{{event.title}}</strong> - {{event.description}}
 					{% endfor %}
-					</tr>
+				</td>
 				{% endfor %}
+				</tr>
+			{% endfor %}
 
-			</table>
-			
-			</td>
-		</tr>
-	</table>
+		</table>
+	</div>
 
 </body>
 </html>

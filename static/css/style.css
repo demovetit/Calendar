@@ -1,6 +1,7 @@
 body{
 	
 	font-family: 'Segoe UI';
+	background-color: #606060;
 
 }
 
@@ -33,10 +34,16 @@ table{
 
 /* Monthly View Table Style Mods */
 
-.masterTable{
+.masterContainer{
 	width: 90%;
 	height: 90%;
-	margin: auto;
+	margin:auto;
+	padding:1em;
+	border-radius: 2em;
+	-moz-border-radius:2em;
+	-webkit-border-radius:2em;
+	-ms-border-radius:2em;
+	background-color: #FFFFFF;
 }
 
 .monthly,.monthlyRow,.monthlyColumn, .DayRow{
@@ -76,13 +83,15 @@ table{
 /* Agenda Page Style Mods */
 .agendaPage{
 	margin: auto;
-	width: 80%;
-	padding: 2em;
+	width: 90%;
+	height: 90%;
+	padding: 1em;
 	height: 100%;
 	border-radius: 2em;
 	-moz-border-radius:2em;
 	-webkit-border-radius:2em;
 	-ms-border-radius:2em;
+	background-color: #FFFFFF;
 }
 
 /* Paragraph Style Mods */
@@ -107,6 +116,7 @@ p.green{
 	color: #04B431;
 }
 
+/* Background color in monthly mode */
 p.bgblue{
 
 	background-color: #0000FF;
@@ -122,6 +132,7 @@ p.bggreen{
 	background-color: #04B431;
 }
 
+
 /* Form and Input Style Mods */
 form{
 	margin: 1% auto;
@@ -135,6 +146,7 @@ input{
 	background-color:#4E4E4E;
 	color:#FFFFFF;
 	height: 26px;
+	font-size: 100%;
 
 }
 
@@ -158,35 +170,10 @@ input.error {
 }
 
 
-/* Links Style Mods */
-a{
-	color:#0066FF;
-	text-decoration: none;
-	font-size: 125%;
-	font-family: 'Segoe UI';
-	margin-right: 2.5%;
-	margin-bottom: 5%;
-}
-
-a:hover{
-	color:#0066FF;
-	text-decoration: underline;
-
-}
-
-a:visited{
-	color:#0066FF;
-}
-
-/* Edit link special Style Mods */
-.editEvents{
-	margin:auto;
-}
-
 /* Different Views Style Mod */
 .diffViews{
-	float:right;
-	margin:auto 1em;
+	float: right;
+	margin: auto 1em;
 }
 
 

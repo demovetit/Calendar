@@ -9,36 +9,30 @@
 <body>
 	
 	
-	<table class="agendaPage" >
-		<tr>
-			<td>
-			<h1>Agenda</h1>
-			<form method = "post">
-				<input id="newEvent" type="submit" value="New Event"/>
-				<a href="/monthly" class= "diffViews">Monthly</a>
-				<a href="/agenda" class= "diffViews">Agenda</a>
-			</form>
+	<div class="agendaPage">
+		<h1>Agenda</h1>
+		<form method = "post">
+			<input id="newEvent" type="submit" value="New Event"/>
+			<input type="button" class="diffViews" onclick="document.location.href='/monthly'" value=" Monthly " />
+			<input type="button" class="diffViews" onclick="document.location.href='/agenda'" value="Agenda" />
+		</form>
 
 
-			
+		
 
-			<p> Refresh your browser to see recent changes </p>
-			<hr>
+		<p> Refresh your browser to see recent changes </p>
+		<hr>
 
-			<!-- Pulls data from Models.py--> 
-			{% for event in events %}
-			<p class="{{event.colour}}">{{event.date_formatted}} - <strong>{{event.title}}</strong></p> <p class="{{event.colour}}">{{event.description}} </p>
-			<form method="POST" action="/event/delete">
-				<input type="hidden" name="event_id" value="{{event.key.id()}}">
-				<a href="/event/edit?event_id={{event.key.id()}}" class="editEvents">Edit</a>
-				<input id="Delete" type = "submit" value ="Delete" />
-			</form>
-			<hr>
-			{% endfor %}
-
-			</td>
-		</tr>
-	</table>
-
+		<!-- Pulls data from Models.py--> 
+		{% for event in events %}
+		<p class="{{event.colour}}">{{event.date_formatted}} - <strong>{{event.title}}</strong></p> <p class="{{event.colour}}">{{event.description}} </p>
+		<form method="POST" action="/event/delete">
+			<input type="hidden" name="event_id" value="{{event.key.id()}}">
+			<input type="button" onclick="document.location.href ='/event/edit?event_id={{event.key.id()}}'" value="  Edit  " />
+			<input id="Delete" type = "submit" value =" Delete " />
+		</form>
+		<hr>
+		{% endfor %}
+	</div>
 </body>
 </html>
