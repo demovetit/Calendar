@@ -14,4 +14,7 @@ class Event(ndb.Model):
   @property
   def date_formatted(self):
 	return datetime.datetime.strftime(self.date, '%d %B %Y')
-  	
+
+  @property
+  def only_date(self):
+  	return datetime.datetime.strftime(self.date, '%d')

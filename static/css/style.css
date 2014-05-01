@@ -1,6 +1,7 @@
 body{
 	
 	font-family: 'Segoe UI';
+
 }
 
 h1{
@@ -25,15 +26,33 @@ h3{
 	text-decoration: underline;
 }
 
+table{
+	background-color: #FFFFFF;
+
+}
+
+/* Monthly View Table Style Mods */
+
+.masterTable{
+	width: 90%;
+	height: 90%;
+	margin: auto;
+}
+
 .monthly,.monthlyRow,.monthlyColumn, .DayRow{
 	border:solid 2px;
 }
 
 .monthly{
-	margin-left: auto;
-	margin-right: auto;
-	width=90%;
-	height=75%;
+	margin:auto;
+	width:90%;
+	height:75%;
+	border-radius: 2em;
+	-moz-border-radius:2em;
+	-webkit-border-radius:2em;
+	-ms-border-radius:2em;
+	padding:1em;
+
 }
 
 .monthlyColumn{
@@ -49,19 +68,34 @@ h3{
 	height: 10%;
 }
 
+/* Events Page Style Mods */
+.eventsPage{
+	margin: auto;
+}
+
+/* Agenda Page Style Mods */
+.agendaPage{
+	margin: auto;
+	width: 80%;
+	padding: 2em;
+	height: 100%;
+	border-radius: 2em;
+	-moz-border-radius:2em;
+	-webkit-border-radius:2em;
+	-ms-border-radius:2em;
+}
+
+/* Paragraph Style Mods */
 p{
 	font-size: 110%;
 }
 
-input.error {
-	
-	outline: #FF0000 solid 2px;
-}
 
+/* Colour Code of Events */
 p.blue{
 
 	color: #0000FF;
-} 
+}
 
 p.red{
 
@@ -70,21 +104,43 @@ p.red{
 
 p.green{
 	
-	color: #00FF00;
+	color: #04B431;
 }
 
+p.bgblue{
+
+	background-color: #0000FF;
+}
+
+p.bgred{
+
+	background-color: #FF0000;
+}
+
+p.bggreen{
+	
+	background-color: #04B431;
+}
+
+/* Form and Input Style Mods */
 form{
 	margin: 1% auto;
 }
 
 input{
-	border-radius: 5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
+	border-radius: 1em;
+	-moz-border-radius:1em;
+	-webkit-border-radius:1em;
 	-ms-border-radius:1em;
-	background-color:#000000;
+	background-color:#4E4E4E;
 	color:#FFFFFF;
+	height: 26px;
 
+}
+
+input.error {
+	
+	outline: #FF0000 solid 2px;
 }
 
 #title{
@@ -97,8 +153,12 @@ input{
 	width: 300px;
 }
 
+#Delete{
+	margin-left:1em;
+}
 
 
+/* Links Style Mods */
 a{
 	color:#0066FF;
 	text-decoration: none;
@@ -109,11 +169,39 @@ a{
 }
 
 a:hover{
-	font-size: 16px;
 	color:#0066FF;
+	text-decoration: underline;
 
 }
 
 a:visited{
 	color:#0066FF;
 }
+
+/* Edit link special Style Mods */
+.editEvents{
+	margin:auto;
+}
+
+/* Different Views Style Mod */
+.diffViews{
+	float:right;
+	margin:auto 1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
