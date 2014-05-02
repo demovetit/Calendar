@@ -3,13 +3,40 @@ import mycalendar.forms
 import mycalendar.models
 from datetime import date
 from datetime import timedelta
-
+from google.appengine.api import users
 from google.appengine.ext import ndb
+from google.appengine.api import mail
+import datetime
+
+
 
 
 class Index(mycalendar.BaseHandler):
 
 	def get(self):
+
+		start_date = date.today()
+
+		end_date = start_date + timedelta(days=7)
+
+		events = mycalendar.models.Event.query().filter(
+			mycalendar.models.Event.date >= start_date,
+			mycalendar.models.Event.date <= end_date,
+		)
+
+		if events.count() > 0 :
+
+			userid = users.get_current_user()
+			userEmailId = userid.email()
+
+			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
+			              to=userEmailId,
+			              subject="Upcoming Event",
+			              body="""
+			Dear User:
+			An upcoming event is fast approaching, please check your calendar to see the event.
+
+			""")
 
 		self.redirect("/monthly")
 
@@ -39,6 +66,7 @@ class EventDelete(mycalendar.BaseHandler):
 
 		ndb.Key(mycalendar.models.Event , int(entityid)).delete()
 
+		
 		self.redirect('/agenda')
 
 class Monthly(mycalendar.BaseHandler):
@@ -138,6 +166,19 @@ class EventEdit(mycalendar.BaseHandler):
 				'form': form,
 				'colours': mycalendar.models.COLOURS
 			}
+			userid = users.get_current_user()
+			userEmailId = userid.email()
+
+			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
+			              to=userEmailId,
+			              subject="Edited Event",
+			              body="""
+			Dear User:
+			
+			Congratulations on editing an existing event to your calendar.
+
+			""")
+
 
 			self.render_template("edit", template_values)
 
@@ -182,6 +223,19 @@ class EventNew(mycalendar.BaseHandler):
 				date = form.date.data,
 				colour = form.colour.data
 			)
+			userid = users.get_current_user()
+			userEmailId = userid.email()
+
+			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
+			              to=userEmailId,
+			              subject="New Event",
+			              body="""
+			Dear User:
+			
+			Congratulations on adding a new event to your calendar.
+
+			""")
+
 			event.put()
 
 			self.redirect("/agenda")
