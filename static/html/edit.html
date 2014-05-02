@@ -51,7 +51,19 @@
                 	else {
                 		
                 		//for each field check if value is true/false add error class to fields that fail
-                	
+                		if (!dataJson["title"])
+                			$("#title").addClass("error");
+
+                		if (!dataJson["description"])
+                			$("#description").addClass("error");
+
+                		if (!dataJson["date"])
+                			$("#date").addClass("error");
+
+                		if (!dataJson["colour"])
+                			$("#colour").addClass("error");
+
+
 
                 	}
 
