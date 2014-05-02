@@ -23,7 +23,6 @@ class Index(mycalendar.BaseHandler):
 			mycalendar.models.Event.date >= start_date,
 			mycalendar.models.Event.date <= end_date,
 		)
-
 		if events.count() > 0 :
 
 			userid = users.get_current_user()
@@ -46,7 +45,7 @@ class Agenda(mycalendar.BaseHandler):
 
 		template_values = {
 			"title": "Events",
-			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= date.today()).order(mycalendar.models.Event.date),
+			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= date.today()).filter(mycalendar.models.Event.owner == users.get_current_user()).order(mycalendar.models.Event.date),
 		}
 
 		self.render_template("agenda", template_values)
@@ -58,8 +57,6 @@ class Agenda(mycalendar.BaseHandler):
 class EventDelete(mycalendar.BaseHandler):
 	
 	def post(self):
-		# import logging
-		# logging.error(self.request.get("event_id"))
 		
 		entityid = self.request.get("event_id")
 
@@ -85,7 +82,8 @@ class Monthly(mycalendar.BaseHandler):
 
 		events = mycalendar.models.Event.query().filter(
 			mycalendar.models.Event.date >= start_date,
-			mycalendar.models.Event.date <= end_date
+			mycalendar.models.Event.date <= end_date,
+			mycalendar.models.Event.owner == users.get_current_user(),
 		)
 
 		weeks = list()
@@ -205,7 +203,7 @@ class EventNew(mycalendar.BaseHandler):
 
 		template_values = {
 			'form': mycalendar.forms.NewEvent(),
-			'colours': mycalendar.models.COLOURS
+			'colours': mycalendar.models.COLOURS,
 		}
 
 		self.render_template("new", template_values)
@@ -213,6 +211,8 @@ class EventNew(mycalendar.BaseHandler):
 	def post(self):
 
 		form = mycalendar.forms.NewEvent(self.request.POST)
+		userid = users.get_current_user()
+		userEmailId = userid.email()
 
 		if form.validate():
 
@@ -221,10 +221,10 @@ class EventNew(mycalendar.BaseHandler):
 				title = form.title.data,
 				description = form.description.data,
 				date = form.date.data,
-				colour = form.colour.data
+				colour = form.colour.data,
+				owner = users.get_current_user()
 			)
-			userid = users.get_current_user()
-			userEmailId = userid.email()
+			
 
 			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
 			              to=userEmailId,

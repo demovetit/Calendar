@@ -9,6 +9,7 @@ class Event(ndb.Model):
   description = ndb.StringProperty()
   date = ndb.DateProperty(required = True)
   colour = ndb.StringProperty(choices = COLOURS)
+  owner = ndb.UserProperty()
 
   #Converts the Date Format
   @property
@@ -18,3 +19,4 @@ class Event(ndb.Model):
   @property
   def only_date(self):
   	return datetime.datetime.strftime(self.date, '%d')
+ 
