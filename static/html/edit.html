@@ -3,7 +3,7 @@
 	<title>Edit Event</title>
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="/js/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">	
   	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -14,22 +14,65 @@
   	});
 	</script>
 
+
+    <script>
+
+        $(document).ready(function() {
+
+            // Attach a submit handler to the form
+            $("#update").submit(function( event ) {
+             
+                // Stop form from submitting normally
+                event.preventDefault();
+                 
+                // Get some values from elements on the page:
+                var form = $(this);
+                //var event_id = form.find( "input[name='event_id']" ).val();
+                var url = form.attr("action");
+                 
+                // Send the data using post
+                var posting = $.post(
+                url,
+                {
+                    title: form.find( "input[name='title']" ).val(),
+                    description: form.find( "input[name='description']" ).val(),
+                    date: form.find( "input[name='date']" ).val(),
+                    colour: form.find( "select[name='colour']" ).val()
+
+                });
+                 
+                //Put the results in a div
+                posting.done(function( data ) {
+                	var dataJson = jQuery.parseJSON(data);
+
+                	if(dataJson["success"]) {
+                		console.log("success!!!!");
+                	}
+                	else {
+                		
+                		//for each field check if value is true/false add error class to fields that fail
+                	
+
+                	}
+
+                });
+            });
+        });
+
+    </script>
+
 </head>
 <body>
 	<div class="masterContainer">
 		<h1>Edit Event</h1>
-		<form method="post">
+		<form id = "update" method="post">
 			<table class="eventsPage">
 				<tr>
 					<td>
 						{{form.title.label()}}
 					</td>
 					<td>
-						{% if form.title.errors %}
-						<input class="error" id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
-						{% else %}
-						<input id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
-						{% endif %}
+						<input class ="" id="{{form.title.name}}" type="text" name="{{form.title.name}}" placeholder="{{form.title.description}}" value="{{form.title.data}}"/> 
 					</td>
 				</tr>
 				<tr>
@@ -37,11 +80,7 @@
 						{{form.description.label()}}
 					</td>
 					<td>
-						{% if form.description.errors %}
-						<input id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
-						{% else %}
-						<input id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
-						{% endif %}
+						<input class ="" id="{{form.description.name}}" type="text" name="{{form.description.name}}" placeholder="{{form.description.description}}" value="{{form.description.data}}"/> 
 					</td>
 				</tr>
 				<tr>
@@ -49,11 +88,7 @@
 						{{form.date.label()}}
 					</td>
 					<td>
-						{% if form.date.errors %}
-						<input class="error" id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
-						{% else %}
-						<input id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
-						{% endif %}
+						<input class ="" id="{{form.date.name}}" type="text" name="{{form.date.name}}" placeholder="{{form.date.description}}" value="{{form.date.data}}"/> 
 					</td>
 				</tr>
 				<tr>
@@ -76,12 +111,6 @@
 					<td>
 					</td>
 					<td>
-						{% if updated == True %}
-						<p> Info Updated</p>
-						<p>Redirecting.........</p>
-						<script type="text/javascript">
-							setTimeout(function(){window.location = '/agenda'}, 2000); </script>
-						{% endif %}
 						<input type="button" onclick="document.location.href='/agenda'" value="  Back  " />
 						<input type="submit" value="Update"/>
 					</td>

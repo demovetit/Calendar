@@ -8,7 +8,7 @@ from google.appengine.ext import ndb
 from google.appengine.api import mail
 import datetime
 
-
+import json
 
 
 class Index(mycalendar.BaseHandler):
@@ -177,22 +177,22 @@ class EventEdit(mycalendar.BaseHandler):
 
 			""")
 
-
-			self.render_template("edit", template_values)
-
-		else:
-
-			#if date validation fails then reset to an empty string
-			if form.date.data is None:
-				form.date.data = ""
-		
-			template_values = {
-				'updated': False,
-				'form': form,
-				'colours': mycalendar.models.COLOURS
+			json_body = {
+				"success": True
 			}
 
-			self.render_template("edit", template_values)
+			self.response.out.write(json.dumps(json_body))
+
+		else:
+			json_body = {
+				"success": False,
+				"title": len(form.title.errors) == 0,
+				"description": len(form.description.errors) == 0,
+				"date": len(form.date.errors) == 0,
+				"colour": len(form.colour.errors) == 0,
+			}
+
+			self.response.out.write(json.dumps(json_body))
 
 
 
