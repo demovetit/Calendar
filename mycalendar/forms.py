@@ -3,10 +3,6 @@ from wtforms import DateField
 from wtforms import validators
 from datetime import date
 import mycalendar.models
-from google.appengine.api import users
-from google.appengine.api import mail
-
-userid = users.get_current_user();
 
 class NewEvent(Form):
 
@@ -44,6 +40,3 @@ class NewEvent(Form):
 		]
 	)
 
-	searchid = StringField(
-		default = userid
-	)

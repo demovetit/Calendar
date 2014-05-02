@@ -8,10 +8,8 @@ from google.appengine.ext import ndb
 from google.appengine.api import mail
 import datetime
 
-template_values[
-	
-	"userid":users.get_current_user(),
-]
+
+
 
 class Index(mycalendar.BaseHandler):
 
@@ -28,6 +26,7 @@ class Index(mycalendar.BaseHandler):
 
 		if events.count() > 0 :
 
+			userid = users.get_current_user()
 			userEmailId = userid.email()
 
 			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
@@ -47,9 +46,7 @@ class Agenda(mycalendar.BaseHandler):
 
 		template_values = {
 			"title": "Events",
-			"events":  mycalendar.models.Event.query(
-				mycalendar.models.Event.date >= date.today()).order(mycalendar.models.Event.date),
-
+			"events":  mycalendar.models.Event.query(mycalendar.models.Event.date >= date.today()).order(mycalendar.models.Event.date),
 		}
 
 		self.render_template("agenda", template_values)
@@ -163,13 +160,13 @@ class EventEdit(mycalendar.BaseHandler):
 			event.description = form.description.data
 			event.date = form.date.data
 			event.colour = form.colour.data
-			eve
 			event.put()
 			template_values = {
 				'updated': True,
 				'form': form,
 				'colours': mycalendar.models.COLOURS
 			}
+			userid = users.get_current_user()
 			userEmailId = userid.email()
 
 			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
@@ -225,8 +222,8 @@ class EventNew(mycalendar.BaseHandler):
 				description = form.description.data,
 				date = form.date.data,
 				colour = form.colour.data
-				searchid = self.userid
 			)
+			userid = users.get_current_user()
 			userEmailId = userid.email()
 
 			mail.send_mail(sender="Kalsync.com <demovetit@gmail.com>",
