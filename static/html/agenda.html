@@ -1,38 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Agenda</title>
+    <title>Agenda</title>
 
-	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            // Attach a submit handler to the form
+            $("form.delete").submit(function( event ) {
+             
+                // Stop form from submitting normally
+                event.preventDefault();
+                 
+                // Get some values from elements on the page:
+                var form = $(this);
+                var event_id = form.find( "input[name='event_id']" ).val();
+                var url = form.attr("action");
+                 
+                // Send the data using post
+                var posting = $.post(
+                url,
+                {
+                    event_id: event_id
+                });
+                 
+                //Put the results in a div
+                posting.done(function( data ) {
+                    
+                    var eventListItem = $("#"+event_id);
+                    eventListItem.remove();
+
+                });
+            });
+        });
+
+    </script>
 
 </head>
 <body>
-	
-	
-	<div class="agendaPage">
-		<h1>Agenda</h1>
-		<form method = "post">
-			<input id="newEvent" type="submit" value="New Event"/>
-			<input type="button" class="diffViews" onclick="document.location.href='/monthly'" value=" Monthly " />
-			<input type="button" class="diffViews" onclick="document.location.href='/agenda'" value="Agenda" />
-		</form>
+    
+    
+    <div class="agendaPage">
+        <h1>Agenda</h1>
+        <form method = "post">
+            <input id="newEvent" type="submit" value="New Event"/>
+            <input type="button" class="diffViews" onclick="document.location.href='/monthly'" value=" Monthly " />
+            <input type="button" class="diffViews" onclick="document.location.href='/agenda'" value="Agenda" />
+        </form>
 
 
-		
+        
 
-		<p> Refresh your browser to see recent changes </p>
-		<hr>
-
-		<!-- Pulls data from Models.py--> 
-		{% for event in events %}
-		<p class="{{event.colour}}">{{event.date_formatted}} - <strong>{{event.title}}</strong></p> <p class="{{event.colour}}">{{event.description}} </p>
-		<form method="POST" action="/event/delete">
-			<input type="hidden" name="event_id" value="{{event.key.id()}}">
-			<input type="button" onclick="document.location.href ='/event/edit?event_id={{event.key.id()}}'" value="  Edit  " />
-			<input id="Delete" type = "submit" value =" Delete " />
-		</form>
-		<hr>
-		{% endfor %}
-	</div>
+        <p> Refresh your browser to see recent changes </p>
+        <hr>
+        <ul>
+        <!-- Pulls data from Models.py--> 
+        {% for event in events %}
+            <li id="{{event.key.id()}}" class="event">
+                <p class="{{event.colour}}">{{event.date_formatted}} - <strong>{{event.title}}</strong></p>
+                <p class="{{event.colour}}">{{event.description}} </p>
+                <form class="delete" method="POST" action="/event/delete">
+                    <input type="hidden" name="event_id" value="{{event.key.id()}}">
+                    <input type="button" onclick="document.location.href ='/event/edit?event_id={{event.key.id()}}'" value="  Edit  " />
+                    <input id="Delete" type = "submit" value =" Delete " />
+                </form>
+                <hr>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
